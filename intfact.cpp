@@ -70,9 +70,9 @@ vector<unsigned long long int>* factorize(struct a* arg) {
 	if (cc == '1' && nn == '0') {
 		nchanges = 0;
 	}
-        if (nn == num[ctr]) {
+        if (nchanges > 0 && nn == num[ctr]) {
               bool isRiemann1 = isRiemannZero(nchanges);
-              if (nchanges % 10 == 0 || isRiemann1) {
+              if ((nchanges % 10 == 0) || isRiemann1) {
 		      if (nchanges % 10 == 0) {
 		         cout << nn << "#\t\t#" << nchanges << endl;
 		      } else {
