@@ -49,7 +49,7 @@ vector<unsigned long long int>* factorize(struct a* arg) {
           f = fopen64("./negative_values.txt","r");
           g = fopen64("./negative_changes.txt","r");
     }
-    unsigned long long int l = strlen(num);
+    unsigned long long int l = strlen(num) - 1;
     unsigned long long int ctr = 0;
     unsigned long long int nchanges = 0;
     char nn = 0, cc = 0;
@@ -67,19 +67,21 @@ vector<unsigned long long int>* factorize(struct a* arg) {
 	if (cc == '1') {
 		++nchanges;
 	}
-	if (cc == '1' && nn == '0') {
-		nchanges = 0;
-	}
-        if (nchanges > 0 && nn == num[ctr]) {
+        if (nn == num[ctr]) {
               bool isRiemann1 = isRiemannZero(nchanges);
               if (isRiemann1) {
-		         cout << ctr << "\t\t" << l << "\t\t" <<nn << "*\t\t*" << nchanges << endl;
+		         cout << ctr << "\t\t" << l << "\t\t" << cc << "\t\t" <<nn << "*\t\t*" << nchanges << endl;
                          ++ctr;
 		  if (ctr == l) break;
 	      } else {
-		  cout << ctr << "\t\t" << l << "\t\t" <<nn << " \t\t " << nchanges << endl;
+		  cout << ctr << "\t\t" << l << "\t\t" << cc << "\t\t" <<nn << " \t\t " << nchanges << endl;
 	      }
         }
+	if (cc == '1' && nn == '0') {
+		nchanges = 0;
+	}
+	fflush(f);
+	fflush(g);
     }
     fclose(f);
     fclose(g);
