@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
     char* num = strdup(argv[1]);
     struct a* arg1 = new (struct a)();
     arg1->num = strdup(num);
-    arg1->param = 1;
+    arg1->param = 0;
     pthread_t thread_id1, thread_id2;
     vector<unsigned long long int>* ret1 = 0, *ret2 = 0;
     pthread_create(&thread_id1, NULL, factorize, arg1);
