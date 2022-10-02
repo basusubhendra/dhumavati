@@ -37,7 +37,7 @@ bool isRiemannZero(unsigned long long int x) {
     return false;
 }
 
-void* factorize(void* arg) {
+vector<unsigned long long int>* factorize(struct a* arg) {
     char* num = ((struct a*) arg)->num;
     short int param = ((struct a*) arg)->param;
     FILE* f = 0, *g = 0;
@@ -55,7 +55,15 @@ void* factorize(void* arg) {
     char nn = 0, cc = 0;
     while (ctr < l) {
         int ret = fscanf(f, "%c", &nn);
+	if (ret == EOF) {
+		printf("\nAbnormal Termination\n");
+		exit(2);
+	}
         ret = fscanf(g, "%c", &cc);
+	if (ret == EOF) {
+		printf("\nAbnormal Termination\n");
+		exit(2);
+	}
 	if (cc == '1') {
 		++nchanges;
 	}
@@ -65,10 +73,15 @@ void* factorize(void* arg) {
         if (nn == num[ctr]) {
               bool isRiemann1 = isRiemannZero(nchanges);
               if (nchanges % 10 == 0 || isRiemann1) {
-		  cout << nn << "\t\t" << nchanges << endl;
+		      if (nchanges % 10 == 0) {
+		         cout << nn << "#\t\t#" << nchanges << endl;
+		      } else {
+		         cout << nn << "*\t\t*" << nchanges << endl;
+		      }
                   ++ctr;
+		  if (ctr == l) break;
 	      } else {
-		  cout << nn << "\t\t" << nchanges << endl;
+		  cout << nn << " \t\t " << nchanges << endl;
 	      }
         }
     }
@@ -79,12 +92,11 @@ void* factorize(void* arg) {
 
 int main(int argc, char* argv[]) {
     char* num = strdup(argv[1]);
+    num[strlen(num)-1] = '\0';
     struct a* arg1 = new (struct a)();
     arg1->num = strdup(num);
     arg1->param = 0;
     pthread_t thread_id1, thread_id2;
-    vector<unsigned long long int>* ret1 = 0, *ret2 = 0;
-    pthread_create(&thread_id1, NULL, factorize, arg1);
-    pthread_join(thread_id1, (void**) &ret1);
+    vector<unsigned long long int>* ret1 = factorize(arg1);
     return 0;
 }
