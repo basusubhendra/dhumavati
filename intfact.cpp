@@ -72,16 +72,12 @@ vector<unsigned long long int>* factorize(struct a* arg) {
 	}
         if (nchanges > 0 && nn == num[ctr]) {
               bool isRiemann1 = isRiemannZero(nchanges);
-              if ((nchanges % 10 == 0) || isRiemann1) {
-		      if (nchanges % 10 == 0) {
-		         cout << nn << "#\t\t#" << nchanges << endl;
-		      } else {
-		         cout << nn << "*\t\t*" << nchanges << endl;
-		      }
-                  ++ctr;
+              if (isRiemann1) {
+		         cout << ctr << "\t\t" << l << "\t\t" <<nn << "*\t\t*" << nchanges << endl;
+                         ++ctr;
 		  if (ctr == l) break;
 	      } else {
-		  cout << nn << " \t\t " << nchanges << endl;
+		  cout << ctr << "\t\t" << l << "\t\t" <<nn << " \t\t " << nchanges << endl;
 	      }
         }
     }
@@ -92,7 +88,6 @@ vector<unsigned long long int>* factorize(struct a* arg) {
 
 int main(int argc, char* argv[]) {
     char* num = strdup(argv[1]);
-    num[strlen(num)-1] = '\0';
     struct a* arg1 = new (struct a)();
     arg1->num = strdup(num);
     arg1->param = 0;
